@@ -52,18 +52,14 @@ class Unit:
     def set_fraction(self, fraction: str):
         self.fraction = fraction
 
-    def move(self, x_delta: int, y_delta: int):
-        self.x += x_delta
-        self.y += y_delta
-
-    def move_to(self, x: int, y: int):
-        self.x = x
-        self.y = y
-
-    def change_x(self, x_delta):
+    def change_x(self, x_delta: int):
         self.x += x_delta
 
-    def change_y(self, y_delta):
+    def change_y(self, y_delta: int):
+        self.y = y_delta
+
+    def change_coords(self, x_delta: int, y_delta: int):
+        self.x += x_delta
         self.y = y_delta
 
     def is_alive(self):
@@ -140,10 +136,13 @@ class MotherBaseUnit (Unit):
         super().__init__(*args, **kwargs)
         self.health = None
         self.melange = None # Кол-во производимой пряности за 1 ход
+        self.set_coords(x, y)
 
         # MotherBaseUnit не может быть перемещён
-        self.move = None
-        self.move_to = None
+        self.change_x = None
+        self.change_y = None
+        self.set_coords = None
+        self.change_coords = None
         self.change_x = None
         self.change_y = None
 
