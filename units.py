@@ -37,11 +37,34 @@ class Unit:
         self.x = x;
         self.y = y
 
+    def get_coords(self):
+        return (self.x, self.y)
+
+    def get_y(self):
+        return self.y
+
+    def get_x(self):
+        return self.x
+
     def __str__(self):
         return 'Unit'
 
     def set_fraction(self, fraction: str):
         self.fraction = fraction
+
+    def move(self, x_delta: int, y_delta: int):
+        self.x += x_delta
+        self.y += y_delta
+
+    def move_to(self, x: int, y: int):
+        self.x = x
+        self.y = y
+
+    def change_x(self, x_delta):
+        self.x += x_delta
+
+    def change_y(self, y_delta):
+        self.y = y_delta
 
     def is_alive(self):
         """
@@ -54,12 +77,11 @@ class Unit:
 
 class WarUnit (Unit):
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, x: int, y: int, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.x = 0
-        self.y = 0
-        self.damage = 0
-        self.health = 0
+        self.set_coords(x, y)
+        self.damage = None
+        self.health = None
 
     def __str__(self):
         return 'WarUnit'
@@ -76,6 +98,9 @@ class WarUnit (Unit):
 
     def is_alive(self):
         return self.health > 0
+
+    def change_health(self, health_delta: int):
+        self.health += health_delta
 
 
 class MovingWarUnit (WarUnit):
@@ -111,16 +136,28 @@ class Flyer (MovingWarUnit):
 
 class MotherBaseUnit (Unit):
     
-    def __init__(self, *args, **kwargs):
+    def __init__(self, x: int, y: int, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.health = None
-        self.melange = None # Melange producing per one tic (turn)
+        self.melange = None # Кол-во производимой пряности за 1 ход
+
+        # MotherBaseUnit не может быть перемещён
+        self.move = None
+        self.move_to = None
+        self.change_x = None
+        self.change_y = None
 
     def set_melange(self, melange: int):
         self.melange = melange
 
     def set_health(self, health: int):
         self.health = health
+
+    def change_health(self, health_delta: int):
+        self.health += health_delta
+
+    def is_alive(self):
+        return self.health > 0
 
     def __str__(self):
         return 'MotherBaseUnit'
@@ -156,12 +193,24 @@ class DivisionBuilder:
         pass
 
     def get_division(self, fraction: str, x: int, y: int, health: int, damage: int, speed: int):
-        division = Division()
+        division = Division(x, y)
         division.set_fraction(fraction)
-        division.set_coords(x, y)
         division.set_health(health)
         division.set_damage(damage)
         division.set_speed(speed)
+
+
+class FlyerBuilder:
+    
+    def __init__(self):
+        pass
+
+    def get_flyer(self, fraction: str, x: int, y: int, health: int, damage: int, speed: int):
+        flyer = Flyer(x, y)
+        flyer.set_fraction(fraction)
+        flyer.set_health(health)
+        flyer.set_damage(damage)
+        flyer.set_speed(speed)
 
 
 class WarUnitsFabric:
@@ -181,6 +230,13 @@ class WarUnitsFabric:
 
         return DivisionBuilder().get_division(self.fraction, x, y, health, damage, speed)
 
+    def create_flyer(self, x: int, y: int):
+        health = 25
+        damage = 15
+        speed = 2
+
+        return FlyerBuilder().get_flyer(self.fraction, x, y, health, damage, speed)
+
 
 class MotherBaseBuider:
 
@@ -189,11 +245,10 @@ class MotherBaseBuider:
 
     def get_unit(self, fraction: str, x: int, y: int, health: int, melange: int):
         if fraction == Fractions().Harkonnen():
-            unit = Harverster()
+            unit = Harverster(x, y)
         elif fraction == Fractions().Fremen():
-            unit = Village()
+            unit = Village(x, y)
 
-        unit.set_coords(x, y)
         unit.set_health(health)
         unit.set_melange(melange)
         return unit
@@ -204,7 +259,7 @@ class MotherBaseFabric:
     def __init__(self, fraction: str):
         self.fraction = fraction
 
-    def create_motherbase(self, x, y):
+    def create_motherbase(self, x: int, y: int):
         if self.fraction == Fractions().Harkonnen():
             melange = 5
             health = 250
