@@ -10,5 +10,8 @@ class Board:
     def remove_unit(self, x: int, y: int):
         self.board[x][y] = None
 
+    def get_unit(self, x: int, y: int):
+        return self.board[x][y]
+
     def get_size(self):
         return self.side_length

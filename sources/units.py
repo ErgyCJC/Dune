@@ -56,11 +56,11 @@ class Unit:
         self.x += x_delta
 
     def change_y(self, y_delta: int):
-        self.y = y_delta
+        self.y += y_delta
 
     def change_coords(self, x_delta: int, y_delta: int):
         self.x += x_delta
-        self.y = y_delta
+        self.y += y_delta
 
     def is_alive(self):
         """
@@ -90,7 +90,7 @@ class WarUnit (Unit):
 
     def attack(self, enemy: Unit):
         if enemy.is_alive() and hasattr(enemy, 'change_health'):
-            enemy.change_health(self.damage)
+            enemy.change_health(-1 * self.damage)
 
     def is_alive(self):
         return self.health > 0
@@ -198,6 +198,8 @@ class DivisionBuilder:
         division.set_damage(damage)
         division.set_speed(speed)
 
+        return division
+
 
 class FlyerBuilder:
     
@@ -210,6 +212,8 @@ class FlyerBuilder:
         flyer.set_health(health)
         flyer.set_damage(damage)
         flyer.set_speed(speed)
+
+        return flyer
 
 
 class WarUnitsFabric:
@@ -260,7 +264,7 @@ class MotherBaseFabric:
 
     def create_motherbase(self, x: int, y: int):
         if self.fraction == Fractions().Harkonnen():
-            melange = 5
+            melange = 7
             health = 250
         elif self.fraction == Fractions().Fremen():
             melange = 3
