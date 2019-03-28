@@ -1,2 +1,7 @@
-**/.vscode
-**/.DS_Store
+**/lib/
+**/bin/
+**/include/
+**/__pycache__
+**/__pycharm__
+
+.Python
