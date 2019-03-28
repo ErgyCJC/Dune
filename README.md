@@ -20,8 +20,8 @@ Unit'ы класса `Harvester` доступны только фракции `H
 ![imagine](img/HouseHold.png)
 
 ### Остальные классы
-+ `DuneGame` - общий Singleton игры
-+ `Board` - класс игрового поля, хранит и предоставляет доступ к матрице Unit'ов
++ `$ DuneGame` - общий Singleton игры
++ `$ Board` - класс игрового поля, хранит и предоставляет доступ к матрице Unit'ов
 
 ![image](img/Other.png)
 
@@ -29,5 +29,5 @@ Unit'ы класса `Harvester` доступны только фракции `H
 `python3 sources/main.py`
 
 ### Тестирование
-+ `pytest sources/` в корневой директории репозитория
-+ `pytest` в директории `sources`
++ `$ pytest sources/` в корневой директории репозитория
++ `$ pytest` в директории `sources`
