@@ -23,16 +23,6 @@ def test_unit():
     assert(test_unit.get_x() == x) is True
     test_unit.set_y(y)
     assert(test_unit.get_y() == y) is True
-
-    delta_x, delta_y = -4, 7
-    test_unit.change_coords(delta_x, delta_y)
-    assert(test_unit.get_coords() == (x + delta_x, y + delta_y))
-
-    x += delta_x
-    y += delta_y
-    test_unit.change_x(delta_x)
-    test_unit.change_y(delta_y)
-    assert(test_unit.get_coords() == (x + delta_x, y + delta_y))
     
     test_unit.set_fraction(Fractions().Fremen())
     assert(test_unit.fraction == Fractions().Fremen()) is True
@@ -73,8 +63,18 @@ def test_warunit():
 def test_movingwarunit():
     x, y = 13, 15
     test_unit = MovingWarUnit(x, y)
-    value = 78
+    
+    delta_x, delta_y = -4, 7
+    test_unit.change_coords(delta_x, delta_y)
+    assert(test_unit.get_coords() == (x + delta_x, y + delta_y))
 
+    x += delta_x
+    y += delta_y
+    test_unit.change_x(delta_x)
+    test_unit.change_y(delta_y)
+    assert(test_unit.get_coords() == (x + delta_x, y + delta_y))
+
+    value = 78
     test_unit.set_speed(value)
     assert(test_unit.speed == value) is True
 
