@@ -52,16 +52,6 @@ class Unit:
     def set_fraction(self, fraction: str):
         self.fraction = fraction
 
-    def change_x(self, x_delta: int):
-        self.x += x_delta
-
-    def change_y(self, y_delta: int):
-        self.y += y_delta
-
-    def change_coords(self, x_delta: int, y_delta: int):
-        self.x += x_delta
-        self.y += y_delta
-
     def is_alive(self):
         """
         При расширении функционала возможны Unit'ы,
@@ -105,6 +95,16 @@ class MovingWarUnit (WarUnit):
         super().__init__(*args, **kwargs)
         self.speed = None
 
+    def change_x(self, x_delta: int):
+        self.x += x_delta
+
+    def change_y(self, y_delta: int):
+        self.y += y_delta
+
+    def change_coords(self, x_delta: int, y_delta: int):
+        self.x += x_delta
+        self.y += y_delta
+
     def set_speed(self, speed:int):
         self.speed = speed
 
@@ -143,8 +143,6 @@ class MotherBaseUnit (Unit):
         self.change_y = None
         self.set_coords = None
         self.change_coords = None
-        self.change_x = None
-        self.change_y = None
 
     def set_melange(self, melange: int):
         self.melange = melange
