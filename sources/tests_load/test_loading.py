@@ -1,6 +1,11 @@
 from dune import *
 
 
+class TestUnitClass:
+        def __init__(self):
+            pass
+
+
 def test_many_units_16():
     board_size = 16
     game = DuneGame(board_size)
