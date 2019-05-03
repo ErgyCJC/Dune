@@ -1,6 +1,7 @@
 import board
 
-class Unit:
+
+class TestUnitClass:
         def __init__(self):
             pass
 
@@ -34,18 +35,47 @@ def test_set_unit():
     x = y = size // 2
     test_board = board.Board(size)
 
-    test_unit = Unit()
+    test_unit = TestUnitClass()
     test_board.set_unit(x, y, test_unit)
 
     assert(type(test_unit) == type(test_board.board[x][y])) is True
     assert(test_unit is test_board.board[x][y]) is True
 
 
+def test_is_unit_true():
+    size = 16
+    test_board = board.Board(size)
+
+    assert(test_board.is_unit(0, 0) is False)
+
+
+def test_is_unit_true():
+    size = 16
+    test_board = board.Board(size)
+    test_board.set_unit(0, 0, TestUnitClass())
+
+    assert(test_board.is_unit(0, 0) is True)
+
+
+def test_valid_coords():
+    size = 16
+    test_board = board.Board(size)
+
+    assert(test_board.valid_coords(4, 5) is True)
+    assert(test_board.valid_coords(0, 0) is True)
+    assert(test_board.valid_coords(size - 1, size - 1) is True)
+    
+    assert(test_board.valid_coords(-3, 4) is False)
+    assert(test_board.valid_coords(6, - 3) is False)
+    assert(test_board.valid_coords(6, size + 3) is False)
+    assert(test_board.valid_coords(size + 3, 4) is False)
+
+
 def test_get_unit():
     size = 16
     x = y = size // 2
     test_board = board.Board(size)
-    test_unit = Unit()
+    test_unit = TestUnitClass()
     test_board.set_unit(x, y, test_unit)
 
     assert(test_board.get_unit(x, y) is test_unit)
@@ -55,7 +85,7 @@ def test_remove_unit():
     size = 16
     x = y = size // 2
     test_board = board.Board(size)
-    test_unit = Unit()
+    test_unit = TestUnitClass()
     test_board.set_unit(x, y, test_unit)
     
     assert(test_board.get_unit(x, y) is test_unit) is True

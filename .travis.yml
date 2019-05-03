@@ -6,7 +6,9 @@ python:
 install:
   - pip install -r requirements.txt
 
-script: pytest sources/
+script:
+  - pytest sources/ # Основное Unit-тестирование
+  - pytest
 
 notifications:
   email:
