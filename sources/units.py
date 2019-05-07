@@ -34,7 +34,7 @@ class Unit:
         self.y = y
 
     def set_coords(self, x: int, y: int):
-        self.x = x;
+        self.x = x
         self.y = y
 
     def get_coords(self):
@@ -75,8 +75,14 @@ class WarUnit (Unit):
     def set_damage(self, damage: int):
         self.damage = damage
 
+    def get_attack_power(self):
+        return self.damage
+
     def set_health(self, health: int):
         self.health = health
+
+    def get_health(self):
+        return self.health
 
     def attack(self, enemy: Unit):
         if enemy.is_alive() and hasattr(enemy, 'change_health'):
@@ -135,7 +141,7 @@ class MotherBaseUnit (Unit):
     def __init__(self, x: int, y: int, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.health = None
-        self.melange = None # Кол-во производимой пряности за 1 ход
+        self.melange = None
         self.set_coords(x, y)
 
         # MotherBaseUnit не может быть перемещён
@@ -149,6 +155,9 @@ class MotherBaseUnit (Unit):
 
     def set_health(self, health: int):
         self.health = health
+
+    def get_health(self):
+        return get_health
 
     def change_health(self, health_delta: int):
         self.health += health_delta
