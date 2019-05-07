@@ -5,3 +5,5 @@
 **/__pycharm__
 
 .Python
+.DS_Store
+.vscode
