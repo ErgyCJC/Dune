@@ -31,6 +31,9 @@ class MoveCommand (Command):
         if unit is None or unit.fraction is not fraction or not valid_speed_flag:
             return False
 
+        if abs(x_from - x_to) + abs(y_from - y_to) > unit.speed:
+            return False
+
         return self.board.move_unit(x_from, y_from, x_to, y_to)
 
 
@@ -83,9 +86,16 @@ class CreatingCommand (Command):
         description = args[2]
         
         unit = None
+        cost = None
         common_descriptions = ['flyer', 'division']
         
         if not self.board.valid_coords(x, y):
+            return False
+
+        # Создание unit'ов только на "своей" половине карты
+        if fraction == Fractions().Fremen() and (x + y + 1) >= self.board.side_length:
+            return False
+        elif fraction == Fractions().Harkonnen() and (x + y + 1) <= self.board.side_length:
             return False
 
         if description == 'harvester' and fraction == Fractions().Harkonnen():
@@ -107,5 +117,24 @@ class CreatingCommand (Command):
         else:
             return False
 
+        cost = unit.get_cost()
+        if fraction == Fractions().Fremen() and cost > self.board.get_fremen_melange():
+            return False
+        elif fraction == Fractions().Harkonnen() and cost > self.board.get_harkonnen_melange():
+            return False
+
+        if fraction == Fractions().Fremen():
+            self.board.change_fremen_melange(-cost)
+        elif fraction == Fractions().Harkonnen():
+            self.board.change_harkonnen_melange(-cost)
+
         self.board.set_unit(x, y, unit)
+        return True
+
+
+class EmptyCommand (Command):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def __call__(self) -> bool:
         return True

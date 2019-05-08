@@ -7,17 +7,19 @@ class Drawer:
     def __init__(self, board: Board):
         self.board = board
 
-    def draw(self, turn: int):
+    def draw(self, turn: int, melange: int):
         size = self.board.side_length
 
         # White text with black background
         print('\033[1;37;40m', end='')
 
-        print('\n\nTurn:', turn, end='\n\n')
+        print('\n\nTurn:', turn, '| Melange:', melange, end='\n\n')
 
         print(' ' * 3, end='')
         for x in range(size):
             print(x, end=' ')
+            if x < 10:
+                print(end=' ')
         print('')
 
         for y in range(size):
@@ -45,6 +47,9 @@ class Drawer:
                         print('*', end='')
                     elif isinstance(unit, MotherBaseUnit):
                         print('@', end='')
+
+                if x < 10:
+                    print(end=' ')
 
                 # White text
                 print('\033[1;37;40m', end='')

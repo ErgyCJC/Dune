@@ -19,6 +19,9 @@ class Fractions:
         if not set(self.fractions).isdisjoint(set(new_fraction)):
             self.fractions.append(new_fraction)
 
+class UnitsInfo:
+    units_costs = {'war_unit' : 9, 'motherbase' : 12}
+
 # Units Hierarchy
 class Unit:
 
@@ -38,7 +41,7 @@ class Unit:
         self.y = y
 
     def get_coords(self):
-        return (self.x, self.y)
+        return [self.x, self.y]
 
     def get_y(self):
         return self.y
@@ -66,11 +69,15 @@ class WarUnit (Unit):
     def __init__(self, x: int, y: int, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.set_coords(x, y)
+        self.cost = UnitsInfo.units_costs['war_unit']
         self.damage = None
         self.health = None
 
     def __str__(self):
         return 'WarUnit'
+
+    def get_cost(self):
+        return self.cost
 
     def set_damage(self, damage: int):
         self.damage = damage
@@ -143,6 +150,7 @@ class MotherBaseUnit (Unit):
         self.health = None
         self.melange = None
         self.set_coords(x, y)
+        self.cost = UnitsInfo.units_costs['motherbase']
 
         # MotherBaseUnit не может быть перемещён
         self.change_x = None
@@ -153,8 +161,14 @@ class MotherBaseUnit (Unit):
     def set_melange(self, melange: int):
         self.melange = melange
 
+    def get_cost(self):
+        return self.cost
+
     def set_health(self, health: int):
         self.health = health
+
+    def get_melange(self):
+        return self.melange
 
     def get_health(self):
         return get_health
