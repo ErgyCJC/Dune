@@ -13,7 +13,7 @@ class Strategy:
 
 class RobotStrategy (Strategy):
     def produce_turn(self, board: Board, units_costs: dict):
-        melange = board.get_melange()
+        melange = board.get_harkonnen_melange()
 
         rnd_number = random.random()
         turn_choice = None

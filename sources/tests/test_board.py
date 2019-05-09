@@ -1,4 +1,5 @@
 import board
+from units import *
 
 
 class TestUnitClass:
@@ -91,3 +92,79 @@ def test_remove_unit():
     assert(test_board.get_unit(x, y) is test_unit) is True
     test_board.remove_unit(x, y)
     assert(test_board.get_unit(x, y) is None) is True
+
+
+def test_is_full():
+    test_board = board.Board()
+
+    assert(test_board.is_full() is False) is True
+
+    unit = Flyer(0, 0)
+    test_board.set_unit(0, 0, unit)
+
+    assert(test_board.is_full() is False) is True
+
+
+def test_recalc_filled():
+    test_board = board.Board()
+
+    assert(test_board.recalc_filled_count() == 0) is True
+
+    unit = Flyer(0, 0)
+    test_board.set_unit(0, 0, unit)
+
+    assert(test_board.recalc_filled_count() == 1) is True
+
+    test_board.set_unit(0, 1, unit)
+    test_board.set_unit(1, 0, unit)
+    test_board.set_unit(1, 1, unit)
+
+    assert(test_board.recalc_filled_count() == 4) is True
+
+
+def test_get_fremen_melange():
+    test_board = board.Board()
+    
+    assert(test_board.get_fremen_melange() == 10) is True
+
+
+def test_get_harkonnen_melange():
+    test_board = board.Board()
+    
+    assert(test_board.get_harkonnen_melange() == 10) is True
+
+
+def test_change_fremen_melange():
+    test_board = board.Board()
+    test_board.change_fremen_melange(5)
+    
+    assert(test_board.get_fremen_melange() == 15) is True
+
+
+def test_change_harkonnen_melange():
+    test_board = board.Board()
+    test_board.change_harkonnen_melange(5)
+    
+    assert(test_board.get_harkonnen_melange() == 15) is True
+
+
+def test_earn_melange():
+    test_board = board.Board()
+    village = Village(0, 0)
+    village.set_melange(1)
+    test_board.set_unit(0, 0, village)
+
+    assert(test_board.get_fremen_melange() == 10) is True
+
+    test_board.earn_melange()
+
+    assert(test_board.get_fremen_melange() == 11) is True
+
+
+def test_update():
+    test_board = board.Board()
+    unit = Flyer(0, 0)
+    unit.set_health(-45)
+    test_board.update_board()
+    
+    assert(test_board.get_unit(0, 0) is None) is True

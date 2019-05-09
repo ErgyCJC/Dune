@@ -1,4 +1,5 @@
 from units import *
+from decorators import *
 
 
 class Board:
@@ -62,16 +63,6 @@ class Board:
         
         return False
 
-    def get_melange(self):
-        melange = 0
-        for x in range(self.side_length):
-            for y in range(self.side_length):
-                unit = self.get_unit(x, y)
-                if isinstance(unit, MotherBaseUnit):
-                    melange += unit.get_melange()
-
-        return melange
-
     def recalc_filled_count(self) -> int:
         count = 0
 
@@ -105,3 +96,11 @@ class Board:
                 if unit is not None:
                     if hasattr(unit, 'health') and unit.health <= 0:
                         self.set_unit(x, y, None, True)
+
+                    if hasattr(unit, 'reconstructing_turns'):
+                        if unit.reconstructing_turns == 0:
+                            decorator = ReconstructedDecorator()
+                            unit = decorator(unit)
+                        else:
+                            unit.reconstructing_turns -= 1
+                        self.set_unit(x, y, unit, True)

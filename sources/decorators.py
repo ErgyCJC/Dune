@@ -17,6 +17,6 @@ class ReconstructedDecorator:
         pass
     
     def __call__(self, unit: MotherBaseUnit):
-        if unit.hasattr('reconstructing_turns') and unit.reconstructing_turns is 0:
+        if hasattr(unit, 'reconstructing_turns') and unit.reconstructing_turns == 0:
             unit.melange = unit.previous_melange
         return unit

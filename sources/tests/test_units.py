@@ -16,7 +16,7 @@ def test_unit():
     assert(test_unit.x == x and test_unit.y == y) is True
     assert(test_unit.get_x() == x) is True
     assert(test_unit.get_y() == y) is True
-    assert(test_unit.get_coords() == (x, y)) is True
+    assert(test_unit.get_coords() == [x, y]) is True
 
     x, y = 34, 5
     test_unit.set_x(x)
@@ -35,7 +35,7 @@ def test_unit():
 def test_warunit():
     x, y = 56, 32
     test_warunit = WarUnit(x, y)
-    assert(test_warunit.get_coords() == (x, y)) is True
+    assert(test_warunit.get_coords() == [x, y]) is True
 
     value = 45
     test_warunit.set_damage(value)
@@ -66,13 +66,13 @@ def test_movingwarunit():
     
     delta_x, delta_y = -4, 7
     test_unit.change_coords(delta_x, delta_y)
-    assert(test_unit.get_coords() == (x + delta_x, y + delta_y))
+    assert(test_unit.get_coords() == [x + delta_x, y + delta_y])
 
     x += delta_x
     y += delta_y
     test_unit.change_x(delta_x)
     test_unit.change_y(delta_y)
-    assert(test_unit.get_coords() == (x + delta_x, y + delta_y))
+    assert(test_unit.get_coords() == [x + delta_x, y + delta_y])
 
     value = 78
     test_unit.set_speed(value)
@@ -113,7 +113,7 @@ def test_div_builder():
 
     division = DivisionBuilder().get_division(fraction, x, y, health, damage, speed)
 
-    assert(division.get_coords() == (x, y))
+    assert(division.get_coords() == [x, y])
     assert(division.fraction == fraction)
     assert(division.health == health)
     assert(division.damage == damage)
@@ -129,7 +129,7 @@ def test_flyer_builder():
 
     flyer = FlyerBuilder().get_flyer(fraction, x, y, health, damage, speed)
 
-    assert(flyer.get_coords() == (x, y))
+    assert(flyer.get_coords() == [x, y])
     assert(flyer.fraction == fraction)
     assert(flyer.health == health)
     assert(flyer.damage == damage)
@@ -146,16 +146,16 @@ def test_base_builder():
 
     assert(type(base) == type(Village(0, 0))) is True
     assert(base.fraction == fraction) is True
-    assert(base.get_coords() == (x, y)) is True
+    assert(base.get_coords() == [x, y]) is True
     assert(base.health == health) is True
     assert(base.melange == melange) is True
 
     fraction = Fractions().Harkonnen()
     base = MotherBaseBuider().get_unit(fraction, x, y, health, melange)
 
-    assert(type(base) == type(Harverster(0, 0))) is True
+    assert(type(base) == type(Harvester(0, 0))) is True
     assert(base.fraction == fraction) is True
-    assert(base.get_coords() == (x, y)) is True
+    assert(base.get_coords() == [x, y]) is True
     assert(base.health == health) is True
     assert(base.melange == melange) is True
 
@@ -166,7 +166,7 @@ def test_war_fabric():
     fraction = Fractions().Fremen()
     division = WarUnitsFabric(fraction).create_division(x, y)
     assert(division.fraction == fraction) is True
-    assert(division.get_coords() == (x, y)) is True
+    assert(division.get_coords() == [x, y]) is True
     assert(division.speed == 1) is True
     assert(division.damage == 35) is True
     assert(division.health == 75) is True
@@ -174,7 +174,7 @@ def test_war_fabric():
     fraction = Fractions().Harkonnen()
     division = WarUnitsFabric(fraction).create_division(x, y)
     assert(division.fraction == fraction) is True
-    assert(division.get_coords() == (x, y)) is True
+    assert(division.get_coords() == [x, y]) is True
     assert(division.speed == 1) is True
     assert(division.damage == 25) is True
     assert(division.health == 50) is True
@@ -182,7 +182,7 @@ def test_war_fabric():
     fraction = Fractions().Fremen()
     flyer = WarUnitsFabric(fraction).create_flyer(x, y)
     assert(flyer.fraction == fraction) is True
-    assert(flyer.get_coords() == (x, y)) is True
+    assert(flyer.get_coords() == [x, y]) is True
     assert(flyer.speed == 2) is True
     assert(flyer.damage == 15) is True
     assert(flyer.health == 25) is True
@@ -190,7 +190,7 @@ def test_war_fabric():
     fraction = Fractions().Harkonnen()
     flyer = WarUnitsFabric(fraction).create_flyer(x, y)
     assert(flyer.fraction == fraction) is True
-    assert(flyer.get_coords() == (x, y)) is True
+    assert(flyer.get_coords() == [x, y]) is True
     assert(flyer.speed == 2) is True
     assert(flyer.damage == 15) is True
     assert(flyer.health == 25) is True
@@ -202,13 +202,13 @@ def test_base_fabric():
     fraction = Fractions().Fremen()
     base = MotherBaseFabric(fraction).create_motherbase(x, y)
     assert(type(base) == type(Village(0, 0)))
-    assert(base.get_coords() == (x, y))
+    assert(base.get_coords() == [x, y])
     assert(base.melange == 3)
     assert(base.health == 500)
 
     fraction = Fractions().Harkonnen()
     base = MotherBaseFabric(fraction).create_motherbase(x, y)
-    assert(type(base) == type(Harverster(0, 0)))
-    assert(base.get_coords() == (x, y))
+    assert(type(base) == type(Harvester(0, 0)))
+    assert(base.get_coords() == [x, y])
     assert(base.melange == 7)
     assert(base.health == 250)

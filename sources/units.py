@@ -161,14 +161,14 @@ class MotherBaseUnit (Unit):
     def set_melange(self, melange: int):
         self.melange = melange
 
+    def get_melange(self):
+        return self.melange
+
     def get_cost(self):
         return self.cost
 
     def set_health(self, health: int):
         self.health = health
-
-    def get_melange(self):
-        return self.melange
 
     def get_health(self):
         return get_health
@@ -183,7 +183,7 @@ class MotherBaseUnit (Unit):
         return 'MotherBaseUnit'
 
 
-class Harverster (MotherBaseUnit):
+class Harvester (MotherBaseUnit):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -268,8 +268,10 @@ class MotherBaseBuider:
         pass
 
     def get_unit(self, fraction: str, x: int, y: int, health: int, melange: int):
+        unit = None
+        
         if fraction == Fractions().Harkonnen():
-            unit = Harverster(x, y)
+            unit = Harvester(x, y)
         elif fraction == Fractions().Fremen():
             unit = Village(x, y)
 
@@ -284,6 +286,9 @@ class MotherBaseFabric:
         self.fraction = fraction
 
     def create_motherbase(self, x: int, y: int):
+        health = None
+        melange = None
+
         if self.fraction == Fractions().Harkonnen():
             melange = 7
             health = 250

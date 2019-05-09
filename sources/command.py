@@ -21,15 +21,19 @@ class MoveCommand (Command):
         y_from = int(args[1])
         x_to = int(args[2])
         y_to = int(args[3])
-
-        unit = self.board.get_unit(x_from, y_from)
         
+        if not self.board.valid_coords(x_from, y_from) or not self.board.valid_coords(x_to, y_to):
+            return False
+        
+        unit = self.board.get_unit(x_from, y_from)
+
         valid_speed_flag = False
         if hasattr(unit, 'speed') and unit.speed > 0:
             valid_speed_flag = True
 
         if unit is None or unit.fraction is not fraction or not valid_speed_flag:
             return False
+
 
         if abs(x_from - x_to) + abs(y_from - y_to) > unit.speed:
             return False
@@ -84,7 +88,10 @@ class CreatingCommand (Command):
         x = int(args[0])
         y = int(args[1])
         description = args[2]
-        
+
+        if not fraction in [Fractions().Harkonnen(), Fractions().Fremen()]:
+            return False
+
         unit = None
         cost = None
         common_descriptions = ['flyer', 'division']
