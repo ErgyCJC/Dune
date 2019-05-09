@@ -246,18 +246,18 @@ class WarUnitsFabric:
         if self.fraction == Fractions().Harkonnen():
             health = 50
             damage = 25
-            speed = 1
+            speed = 2
         elif self.fraction == Fractions().Fremen():
             health = 75
             damage = 35
-            speed = 1
+            speed = 2
 
         return DivisionBuilder().get_division(self.fraction, x, y, health, damage, speed)
 
     def create_flyer(self, x: int, y: int):
         health = 25
         damage = 15
-        speed = 2
+        speed = 4
 
         return FlyerBuilder().get_flyer(self.fraction, x, y, health, damage, speed)
 
@@ -290,10 +290,10 @@ class MotherBaseFabric:
         melange = None
 
         if self.fraction == Fractions().Harkonnen():
-            melange = 7
+            melange = 9
             health = 250
         elif self.fraction == Fractions().Fremen():
-            melange = 3
-            health = 500
+            melange = 4
+            health = 400
         
         return MotherBaseBuider().get_unit(self.fraction, x, y, health, melange)
