@@ -1,5 +1,7 @@
 from units import *
 
+""" Декотраторы для атакованных игровых баз """
+
 
 class AttackedDecorator:
     def __init__(self, turns = 3):

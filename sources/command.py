@@ -4,6 +4,9 @@ from board import *
 from decorators import *
 
 
+""" Классы игровых команд """
+
+
 class Command:
     def __init__(self, board: Board):
         self.board = board

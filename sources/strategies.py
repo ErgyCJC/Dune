@@ -3,6 +3,9 @@ from board import *
 from command import *
 
 
+""" Классы игровых стратегий """
+
+
 class Strategy:
     def __init__(self):
         pass

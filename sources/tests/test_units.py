@@ -167,7 +167,7 @@ def test_war_fabric():
     division = WarUnitsFabric(fraction).create_division(x, y)
     assert(division.fraction == fraction) is True
     assert(division.get_coords() == [x, y]) is True
-    assert(division.speed == 1) is True
+    assert(division.speed == 2) is True
     assert(division.damage == 35) is True
     assert(division.health == 75) is True
 
@@ -175,7 +175,7 @@ def test_war_fabric():
     division = WarUnitsFabric(fraction).create_division(x, y)
     assert(division.fraction == fraction) is True
     assert(division.get_coords() == [x, y]) is True
-    assert(division.speed == 1) is True
+    assert(division.speed == 2) is True
     assert(division.damage == 25) is True
     assert(division.health == 50) is True
 
@@ -183,7 +183,7 @@ def test_war_fabric():
     flyer = WarUnitsFabric(fraction).create_flyer(x, y)
     assert(flyer.fraction == fraction) is True
     assert(flyer.get_coords() == [x, y]) is True
-    assert(flyer.speed == 2) is True
+    assert(flyer.speed == 4) is True
     assert(flyer.damage == 15) is True
     assert(flyer.health == 25) is True
 
@@ -191,7 +191,7 @@ def test_war_fabric():
     flyer = WarUnitsFabric(fraction).create_flyer(x, y)
     assert(flyer.fraction == fraction) is True
     assert(flyer.get_coords() == [x, y]) is True
-    assert(flyer.speed == 2) is True
+    assert(flyer.speed == 4) is True
     assert(flyer.damage == 15) is True
     assert(flyer.health == 25) is True
 
@@ -203,12 +203,12 @@ def test_base_fabric():
     base = MotherBaseFabric(fraction).create_motherbase(x, y)
     assert(type(base) == type(Village(0, 0)))
     assert(base.get_coords() == [x, y])
-    assert(base.melange == 3)
-    assert(base.health == 500)
+    assert(base.melange == 4)
+    assert(base.health == 400)
 
     fraction = Fractions().Harkonnen()
     base = MotherBaseFabric(fraction).create_motherbase(x, y)
     assert(type(base) == type(Harvester(0, 0)))
     assert(base.get_coords() == [x, y])
-    assert(base.melange == 7)
+    assert(base.melange == 9)
     assert(base.health == 250)

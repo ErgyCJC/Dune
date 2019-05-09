@@ -3,8 +3,7 @@ from units import *
 
 
 class TestUnitClass:
-        def __init__(self):
-            pass
+    pass
 
 """ TESTS """
 

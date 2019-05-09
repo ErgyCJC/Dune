@@ -8,7 +8,7 @@ def test_many_incorrect_units():
     board_size = 16
     game = DuneGame(board_size)
 
-    replay_count = 100000
+    replay_count = 50000
 
     for i in range(replay_count):
         for x in range(board_size):

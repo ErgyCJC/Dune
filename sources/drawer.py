@@ -3,6 +3,9 @@ from units import *
 from military_structure import *
 
 
+""" Вывод игровой доски в терминал """
+
+
 class Drawer:
     def __init__(self, board: Board):
         self.board = board
