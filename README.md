@@ -1,5 +1,6 @@
-# Dune
 [![Build Status](https://travis-ci.org/ErgyCJC/Dune.svg?branch=master)](https://travis-ci.org/ErgyCJC/Dune)
+
+# Dune
 
 ### Описание
 
@@ -87,3 +88,5 @@
 Используется сервис Travis-CI. Уведомления о всех build'ах (как удачных, так и неудачных) отправляются на email-адрес `tp.address.ergycjc@gmail.com` Проверка осуществляется под `python3.6` и `python3.7`.
 
 Файл конфигурации - `.travis.yml`.
+
+![alt screenshot](img/screenshot.png)
